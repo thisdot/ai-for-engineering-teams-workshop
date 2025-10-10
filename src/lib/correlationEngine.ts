@@ -121,8 +121,7 @@ function findMatchingPattern(
   sentiment: string,
   patterns: CorrelationPattern[]
 ): CorrelationPattern | null {
-  const patternKey = `${sentiment}_sentiment_${alertType.replace(/_/g, '_')}`;
-
+  // Pattern matching based on sentiment and alert type keywords
   return patterns.find(p =>
     p.pattern.toLowerCase().includes(sentiment) &&
     p.pattern.toLowerCase().includes(alertType.split('_')[0])
