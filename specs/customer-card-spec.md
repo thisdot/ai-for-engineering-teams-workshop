@@ -3,140 +3,158 @@
 ## Feature: CustomerCard
 
 ### Context
-- Individual customer display component for the Customer Intelligence Dashboard
-- Used within the CustomerSelector container component to show multiple customers
-- Provides at-a-glance customer information for quick identification and selection
-- Foundation component that will integrate with domain health monitoring features in future exercises
-- Consumed by business users monitoring customer account health and technical teams tracking domain status
+- Purpose: Display individual customer information in a compact, visually appealing card format for the Customer Intelligence Dashboard
+- System integration: Used as a child component within the CustomerSelector container to show a list of customers with their health status and domain information
+- Users: Customer Success Managers and Support teams who need to quickly assess customer health and identify customers for follow-up actions
+- Usage: Primary component for customer browsing and selection in the main dashboard interface, providing at-a-glance visibility into customer status
 
 ### Requirements
 
 #### Functional Requirements
-- Display customer name, company name, and health score in a card format
-- Show customer domains (websites) with clear visual presentation
-- Implement color-coded health indicator system:
-  - Red (0-30): Poor health score indicating critical issues
-  - Yellow (31-70): Moderate health score requiring attention
-  - Green (71-100): Good health score showing healthy account
-- Display domain count badge when customer has multiple domains (e.g., "3 domains")
-- Show single domain inline when customer has only one domain
-- Support responsive layout for mobile (stacked) and desktop (card grid) views
+- Display three core customer attributes:
+  - Customer name (from `Customer.name`)
+  - Company name (from `Customer.company`)
+  - Health score (from `Customer.healthScore` as a number 0-100)
+- Render domain information when available:
+  - Show single domain when customer has one domain
+  - Show primary domain plus count indicator for multiple domains (e.g., "acmecorp.com +1 more")
+  - Handle customers with no domains gracefully (don't display domain section)
+- Implement color-coded health score visualization:
+  - Red styling for scores 0-30 (critical health)
+  - Yellow styling for scores 31-70 (moderate health)
+  - Green styling for scores 71-100 (good health)
+- Support click interactions for future selection functionality (component should be interactive)
 
 #### User Interface Requirements
-- Card-based design with rounded corners and subtle shadow
-- Clear visual hierarchy: customer name most prominent, then company, then domains
-- Health score displayed as a colored badge in top-right corner
-- Domain information section with icon or label
-- Sufficient padding and spacing for readability
-- Hover state to indicate interactivity (preparation for future selection feature)
+- Card-based layout with clear visual hierarchy
+- Health score displayed as a badge or pill with colored background
+- Domain information shown in a secondary text style
+- Responsive design that works on mobile (320px+), tablet (768px+), and desktop (1024px+)
+- Consistent spacing and padding following Tailwind's spacing scale
+- Clear visual separation between cards when displayed in a list
+- Hover states to indicate interactivity
 
 #### Data Requirements
-- Uses mock data from `src/data/mock-customers.ts`
-- Consumes Customer interface with fields:
-  - `id: string` - unique identifier
-  - `name: string` - customer full name
-  - `company: string` - company name
-  - `healthScore: number` - integer between 0-100
-  - `domains?: string[]` - optional array of website URLs
-- Must handle customers with no domains, one domain, or multiple domains gracefully
+- Consume data from `src/data/mock-customers.ts`
+- Use the `Customer` interface as the TypeScript type definition
+- Required fields: `id`, `name`, `company`, `healthScore`
+- Optional fields: `domains` (string array)
+- Handle undefined/null domains array gracefully
 
 #### Integration Requirements
-- Component will be imported into CustomerSelector container (future exercise)
-- Must export as default for dynamic imports in main dashboard page
-- Should be a client component (`'use client'`) for future interactivity
-- Uses Tailwind CSS classes from global stylesheet
+- Designed to be used within CustomerSelector component
+- Accept Customer object as a prop
+- No external API calls (uses static mock data)
+- Support future onClick handler prop for customer selection
+- Compatible with Next.js 15 App Router and React 19
 
 ### Constraints
 
 #### Technical Stack
-- **Framework**: Next.js 15 with React 19
-- **Language**: TypeScript with strict mode enabled
+- **Framework**: Next.js 15 with App Router
+- **React Version**: React 19
+- **Language**: TypeScript (strict mode enabled)
 - **Styling**: Tailwind CSS 4.x utility classes only (no custom CSS)
-- **Component Type**: Client component with `'use client'` directive
+- **Component Type**: Client component (requires `'use client'` directive)
 
 #### File Structure
-- **File Location**: `src/components/CustomerCard.tsx`
-- **Naming Convention**: PascalCase for component and file name
-- **Import Path Example**: `import CustomerCard from '@/components/CustomerCard'`
+- **Component location**: `src/components/CustomerCard.tsx`
+- **Import path for data**: `import { Customer } from '@/data/mock-customers'`
 
-#### TypeScript Definitions
+#### TypeScript Interface
 ```typescript
-// Props interface
 interface CustomerCardProps {
   customer: Customer;
-}
-
-// Customer interface (imported from mock-customers.ts)
-interface Customer {
-  id: string;
-  name: string;
-  company: string;
-  healthScore: number;
-  domains?: string[];
-  // Note: email, subscriptionTier, timestamps exist but not used in v1
+  onClick?: (customerId: string) => void;
 }
 ```
 
-#### Design Constraints
-- **Responsive Breakpoints**:
-  - Mobile (default): Full width cards, stacked layout
-  - Tablet (`md:`): 2-column grid
-  - Desktop (`lg:`): 3-column grid
-- **Component Dimensions**:
-  - Min height: Not specified, let content determine
-  - Padding: `p-4` or `p-6` for internal spacing
-  - Border radius: `rounded-lg`
-  - Shadow: `shadow` or `shadow-md`
-- **Color System** (Tailwind classes):
-  - Red zone (0-30): `bg-red-100 text-red-600 border-red-300`
-  - Yellow zone (31-70): `bg-yellow-100 text-yellow-600 border-yellow-300`
-  - Green zone (71-100): `bg-green-100 text-green-600 border-green-300`
-
 #### Performance Requirements
-- Component must render in under 16ms for smooth 60fps
-- No external API calls (uses local mock data)
-- Minimal re-renders (use React.memo if used in large lists)
+- Component should render in < 16ms for smooth 60fps scrolling
+- No expensive calculations in render function
+- Use appropriate React patterns (no unnecessary re-renders)
+
+#### Design Constraints
+- **Responsive breakpoints**:
+  - Mobile: 320px - 767px (full width, stacked layout)
+  - Tablet: 768px - 1023px (2-column grid when in list)
+  - Desktop: 1024px+ (3-column grid when in list)
+- **Card dimensions**:
+  - Minimum height: 120px
+  - Padding: 1rem (p-4)
+  - Border radius: 0.5rem (rounded-lg)
+  - Shadow: Tailwind's shadow class for elevation
+
+#### Styling Constraints (Tailwind Classes)
+- **Health Score Colors**:
+  - Critical (0-30): `text-red-600`, `bg-red-100`
+  - Moderate (31-70): `text-yellow-600`, `bg-yellow-100`
+  - Good (71-100): `text-green-600`, `bg-green-100`
+- **Card base**: `bg-white`, `rounded-lg`, `shadow`, `border border-gray-200`
+- **Typography**:
+  - Customer name: `text-lg font-semibold text-gray-900`
+  - Company name: `text-sm text-gray-600`
+  - Domain info: `text-xs text-gray-500`
+- **Interactive states**: `hover:shadow-lg`, `cursor-pointer`, `transition-shadow`
+
+#### Props Interface
+```typescript
+import { Customer } from '@/data/mock-customers';
+
+interface CustomerCardProps {
+  customer: Customer;
+  onClick?: (customerId: string) => void;
+}
+
+export default function CustomerCard({ customer, onClick }: CustomerCardProps) {
+  // Component implementation
+}
+```
 
 #### Security Considerations
-- No user input in v1, so XSS not a concern
-- Domain URLs displayed as text only (not clickable links in v1)
-- Health score must be validated as number type (TypeScript enforcement)
+- No user-generated content rendered (using mock data only)
+- No XSS vulnerabilities (React escapes by default)
+- No sensitive data exposure (appropriate for workshop context)
 
 ### Acceptance Criteria
 
 #### Core Functionality
-- [x] Component renders customer name prominently
-- [x] Component displays company name with visual distinction from customer name
-- [x] Health score appears as colored badge matching score range
-- [x] Color coding is correct: red (0-30), yellow (31-70), green (71-100)
-- [x] Domain count badge displays when customer has 2+ domains
-- [x] Single domain displays inline when customer has exactly 1 domain
-- [x] No domain section shown when domains array is empty or undefined
+- [ ] Component renders customer name, company, and health score correctly
+- [ ] Health score displays with appropriate color coding (red/yellow/green)
+- [ ] Health score ranges work correctly:
+  - [ ] Score of 15 shows red styling
+  - [ ] Score of 45 shows yellow styling
+  - [ ] Score of 85 shows green styling
+- [ ] Domain information displays when customer has domains array
+- [ ] Single domain shows full domain name
+- [ ] Multiple domains show first domain plus count (e.g., "+2 more")
+- [ ] Missing domains don't cause errors or display empty section
 
 #### Edge Cases
-- [x] Handles customer with `healthScore: 0` (shows red)
-- [x] Handles customer with `healthScore: 100` (shows green)
-- [x] Handles customer with no domains property (undefined)
-- [x] Handles customer with empty domains array `[]`
-- [x] Handles very long customer names (text truncation with ellipsis)
-- [x] Handles very long company names (text truncation with ellipsis)
+- [ ] Handles customers with no domains gracefully
+- [ ] Handles customers with 1 domain (no count shown)
+- [ ] Handles customers with 2+ domains (shows count)
+- [ ] Health score of exactly 30 displays as red
+- [ ] Health score of exactly 31 displays as yellow
+- [ ] Health score of exactly 70 displays as yellow
+- [ ] Health score of exactly 71 displays as green
+- [ ] Component doesn't break with minimal Customer data (only required fields)
 
 #### User Experience
-- [x] Card has clear visual boundaries (border or shadow)
-- [x] Text is readable with sufficient contrast ratios
-- [x] Component is responsive across mobile, tablet, desktop
-- [x] Health score badge positioned consistently (top-right)
-- [x] Spacing between elements is consistent and visually balanced
+- [ ] Card has clear visual hierarchy (name most prominent)
+- [ ] Hover state provides visual feedback
+- [ ] Component is responsive on mobile devices (320px width)
+- [ ] Component is responsive on tablet devices (768px width)
+- [ ] Component is responsive on desktop devices (1024px+ width)
+- [ ] Text is readable with sufficient color contrast
+- [ ] Spacing and padding feel balanced
 
-#### Integration
-- [x] TypeScript compilation passes with no errors
-- [x] Component exports correctly for import in other files
-- [x] Component accepts Customer type from mock-customers.ts
-- [x] Component uses only Tailwind classes from configured theme
-- [x] Component marked as client component with `'use client'` directive
-
-#### Code Quality
-- [x] Props interface properly typed with CustomerCardProps
-- [x] No `any` types used
-- [x] Helper function or logic for health score color mapping
-- [x] Consistent code formatting (Prettier/ESLint compliant)
+#### Integration & Technical
+- [ ] Component imports Customer type from mock-customers.ts
+- [ ] Component uses 'use client' directive
+- [ ] TypeScript compiles without errors (`npm run type-check`)
+- [ ] Component accepts optional onClick handler
+- [ ] onClick handler receives customer ID when provided
+- [ ] No ESLint errors (`npm run lint`)
+- [ ] Component renders successfully in Next.js app
+- [ ] No console errors or warnings in browser
