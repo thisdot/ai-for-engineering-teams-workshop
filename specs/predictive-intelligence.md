@@ -41,6 +41,420 @@ The Predictive Intelligence System is a comprehensive early warning and insights
 - Historical intelligence view for pattern analysis
 - Primary users: CSMs, account executives, operations teams, leadership
 
+### Integration Architecture
+
+**Component Interaction Diagram**:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        Dashboard Orchestrator                           │
+│                  (Production-Ready Error Handling & Export)             │
+│  ┌───────────────────────────────────────────────────────────────────┐ │
+│  │              Predictive Intelligence Dashboard                     │ │
+│  │                                                                     │ │
+│  │  ┌─────────────────────┐    ┌──────────────────────────────────┐ │ │
+│  │  │  CustomerSelector   │───▶│  PredictiveIntelligence          │ │ │
+│  │  │  (Component Spec)   │    │  Dashboard Component              │ │ │
+│  │  └─────────────────────┘    └──────────────────────────────────┘ │ │
+│  │           │                              │                         │ │
+│  │           │                              ▼                         │ │
+│  │           │                  ┌─────────────────────────┐          │ │
+│  │           │                  │   Alert Engine Core     │          │ │
+│  │           │                  │  ┌──────────────────┐   │          │ │
+│  │           │                  │  │ Alert Rules (5x) │   │          │ │
+│  │           │                  │  │ - Payment Risk   │   │          │ │
+│  │           │                  │  │ - Engagement     │   │          │ │
+│  │           │                  │  │ - Contract Exp   │   │          │ │
+│  │           │                  │  │ - Support Spike  │   │          │ │
+│  │           │                  │  │ - Feature Stall  │   │          │ │
+│  │           │                  │  └──────────────────┘   │          │ │
+│  │           │                  └─────────────────────────┘          │ │
+│  │           │                              │                         │ │
+│  │           ▼                              ▼                         │ │
+│  │  ┌─────────────────────┐    ┌──────────────────────────────────┐ │ │
+│  │  │ Customer Health     │───▶│   Correlation Engine             │ │ │
+│  │  │ Monitoring System   │    │  ┌───────────────────────────┐   │ │ │
+│  │  │ (Combined Spec)     │    │  │ Market-to-Alert Matching  │   │ │ │
+│  │  │                     │    │  │ Pattern Recognition       │   │ │ │
+│  │  │ ┌─────────────────┐ │    │  │ Insight Generation        │   │ │ │
+│  │  │ │HealthCalculator │ │    │  └───────────────────────────┘   │ │ │
+│  │  │ │ - Payment (40%) │ │    └──────────────────────────────────┘ │ │
+│  │  │ │ - Engagement 30%│ │                    │                     │ │
+│  │  │ │ - Contract (20%)│ │                    │                     │ │
+│  │  │ │ - Support (10%) │ │                    ▼                     │ │
+│  │  │ └─────────────────┘ │    ┌──────────────────────────────────┐ │ │
+│  │  └─────────────────────┘    │  Market Intelligence Service     │ │ │
+│  │           │                  │  (Market Intelligence Spec)      │ │ │
+│  │           │                  │                                  │ │ │
+│  │           │                  │  ┌────────────────────────────┐ │ │ │
+│  │           │                  │  │ News Headlines (Mock API)  │ │ │ │
+│  │           │                  │  │ Sentiment Analysis         │ │ │ │
+│  │           │                  │  │ Caching (10-min TTL)       │ │ │ │
+│  │           │                  │  └────────────────────────────┘ │ │ │
+│  │           │                  └──────────────────────────────────┘ │ │
+│  │           │                                                        │ │
+│  │           ▼                                                        │ │
+│  │  ┌─────────────────────┐                                          │ │
+│  │  │ CustomerHealthData  │                                          │ │
+│  │  │ & Mock History      │                                          │ │
+│  │  └─────────────────────┘                                          │ │
+│  └─────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Data Sources (Mock Data Layer):
+  ┌──────────────────┐  ┌───────────────────┐  ┌──────────────────┐
+  │ mock-customers   │  │ mock-health-data  │  │ mock-market-data │
+  │ - Basic info     │  │ - Historical      │  │ - News headlines │
+  │ - Health scores  │  │ - Trends          │  │ - Sentiment      │
+  │ - ARR/contracts  │  │ - Baselines       │  │ - Sources        │
+  └──────────────────┘  └───────────────────┘  └──────────────────┘
+```
+
+**Data Flow Description**:
+
+1. **Customer Selection Flow**:
+   ```
+   User selects customer in CustomerSelector
+     ↓
+   Selected customer ID passed to PredictiveIntelligenceDashboard
+     ↓
+   Dashboard fetches:
+     - Customer health data from CustomerHealthMonitoring
+     - Historical health scores for trend analysis
+     - Company name for market intelligence lookup
+     - Recent alert history for deduplication
+   ```
+
+2. **Alert Generation Flow**:
+   ```
+   Customer health data changes (monitored every 5 minutes)
+     ↓
+   Alert Engine evaluates all 5 alert rules
+     ↓
+   For each triggered rule:
+     - Check cooldown period (query recent alerts)
+     - Extract trigger conditions and values
+     - Calculate base priority score
+     ↓
+   Market Intelligence Service fetches company data
+     ↓
+   Correlation Engine attempts to match alert with market events
+     ↓
+   If correlation found:
+     - Calculate correlation score (timing + sentiment + pattern)
+     - Generate insight and conversation topics
+     - Amplify alert priority by 0-15%
+     ↓
+   Final prioritized alerts returned to dashboard
+     ↓
+   UI displays alerts sorted by priority score
+   ```
+
+3. **Market Intelligence Flow**:
+   ```
+   Customer company name extracted from selected customer
+     ↓
+   Market Intelligence Service checks cache (10-min TTL)
+     ↓
+   Cache miss → Generate mock market data:
+     - Create company-specific headlines (hash-based consistency)
+     - Calculate sentiment from headline aggregation
+     - Weight recent news 2x more heavily
+     - Detect sentiment trends (7-day comparison)
+     ↓
+   Cache hit → Return cached data with cached=true flag
+     ↓
+   Market data displayed in MarketIntelligenceCard
+     ↓
+   Market data passed to Correlation Engine for alert matching
+   ```
+
+4. **Health Score Integration Flow**:
+   ```
+   CustomerHealthMonitoring system calculates scores
+     ↓
+   Health score breakdown available:
+     - Payment score (0-100) with 40% weight
+     - Engagement score (0-100) with 30% weight
+     - Contract score (0-100) with 20% weight
+     - Support score (0-100) with 10% weight
+     - Overall score (weighted average)
+     - Risk level (healthy/warning/critical)
+     ↓
+   Alert Engine uses scores for trigger evaluation:
+     - Payment Risk: Uses payment score + days overdue
+     - Engagement Cliff: Uses engagement trends + login frequency
+     - Contract Expiration: Uses contract score + days to renewal
+     - Support Spike: Uses support score + ticket count
+     - Feature Stall: Uses engagement depth + ARR
+     ↓
+   Health trends (improving/stable/declining) influence priority
+   ```
+
+5. **Correlation Analysis Flow**:
+   ```
+   New alert generated
+     ↓
+   Correlation Engine receives:
+     - Alert details (type, trigger, timestamp)
+     - Market intelligence data for customer's company
+     - Historical correlation patterns (90-day lookback)
+     ↓
+   Calculate correlation score:
+     - Event Timing: How close in time? (decays over 7 days)
+     - Sentiment Alignment: Does sentiment match behavior?
+       * Negative sentiment + engagement cliff = 80+ alignment
+       * Positive sentiment + adoption stall = 75 alignment
+     - Pattern Strength: Historical success rate of this pattern
+     ↓
+   If correlation score > 40:
+     - Generate human-readable insight
+     - Suggest conversation topics for CSM
+     - Attach correlation to alert
+     - Display in CorrelationInsight component
+     ↓
+   If correlation score ≤ 40:
+     - No correlation displayed
+     - Alert shown without market context
+   ```
+
+6. **Export Integration Flow** (Dashboard Orchestrator):
+   ```
+   User clicks Export button
+     ↓
+   Dashboard Orchestrator export system activated
+     ↓
+   Collect data from multiple sources:
+     - Active alerts from PredictiveIntelligence
+     - Customer health scores from HealthMonitoring
+     - Market intelligence from cache
+     - Historical data from mock-health-history
+     ↓
+   Apply user-selected filters:
+     - Priority level (high/medium)
+     - Date range (last 7/30/90 days)
+     - Customer selection (all or specific)
+     - Data type (alerts/health/market)
+     ↓
+   Transform data to selected format (CSV or JSON)
+     ↓
+   Generate file with timestamp in filename
+     ↓
+   Trigger browser download
+     ↓
+   Log export in audit trail (date, user, type, row count)
+   ```
+
+**Key Integration Points**:
+
+1. **CustomerSelector → PredictiveIntelligence**:
+   - **Interface**: `onCustomerSelect(customerId: string)` callback
+   - **Data Passed**: Customer ID
+   - **Purpose**: Filter alerts and market intelligence to selected customer
+   - **Dependency**: CustomerSelector spec (Component Spec #1)
+
+2. **CustomerHealthMonitoring → Alert Engine**:
+   - **Interface**: `CustomerHealthData` and `HealthScoreHistory` interfaces
+   - **Data Passed**:
+     - Current health scores (payment, engagement, contract, support)
+     - Overall health score and risk level
+     - Historical scores (7-day and 30-day windows)
+     - Trend direction (improving/stable/declining)
+   - **Purpose**: Provide data for alert rule evaluation
+   - **Dependency**: Customer Health Monitoring spec (Combined Spec #4)
+   - **Specific Integration**:
+     ```typescript
+     // Alert Engine consumes health data
+     interface AlertEngineInput {
+       customer: Customer;
+       healthData: CustomerHealthData;      // From HealthCalculator
+       healthHistory: HealthScoreHistory;   // From HealthMonitoring
+       marketData?: MarketIntelligence;     // From MarketService
+     }
+     ```
+
+3. **MarketIntelligenceService → Correlation Engine**:
+   - **Interface**: `MarketIntelligence` interface
+   - **Data Passed**:
+     - Company name
+     - Sentiment (positive/neutral/negative)
+     - Sentiment score (-100 to +100)
+     - Sentiment trend (improving/stable/declining)
+     - Recent headlines (top 3)
+     - Last updated timestamp
+   - **Purpose**: Correlate market events with customer alerts
+   - **Dependency**: Market Intelligence Widget spec (Component Spec #3)
+   - **Specific Integration**:
+     ```typescript
+     // Correlation Engine consumes both
+     function calculateCorrelation(
+       alert: CustomerAlert,                // From Alert Engine
+       marketData: MarketIntelligence,      // From Market Service
+       patterns: CorrelationPattern[]       // Historical learning
+     ): MarketEventCorrelation | null
+     ```
+
+4. **HealthCalculator → Alert Rules**:
+   - **Interface**: `HealthScoreBreakdown` interface
+   - **Data Passed**:
+     - Individual factor scores (0-100 each)
+     - Overall score (0-100)
+     - Risk level classification
+     - Calculation timestamp
+   - **Purpose**: Trigger threshold-based alerts
+   - **Dependency**: Health Score Calculator spec (Component Spec #2)
+   - **Specific Alert Triggers**:
+     ```typescript
+     // Payment Risk uses payment score
+     if (healthData.payment.daysSinceLastPayment > 30) { trigger }
+
+     // Engagement Cliff uses engagement trends
+     if (engagementDropPercent > 50 && sustained3Days) { trigger }
+
+     // Contract Expiration uses contract score + health
+     if (daysToRenewal < 90 && overallScore < 50) { trigger }
+     ```
+
+5. **Dashboard Orchestrator → All Components**:
+   - **Interface**: Error boundaries, export functions, performance wrappers
+   - **Data Passed**:
+     - Error context for error boundaries
+     - Export configurations and data
+     - Performance metrics
+   - **Purpose**: Provide production-grade reliability and features
+   - **Dependency**: Dashboard Orchestrator spec (Production Spec #5)
+   - **Specific Integration**:
+     ```typescript
+     // Error Boundary wraps PredictiveIntelligence
+     <WidgetErrorBoundary widgetName="PredictiveIntelligence">
+       <PredictiveIntelligenceDashboard />
+     </WidgetErrorBoundary>
+
+     // Export system aggregates data
+     function exportAlerts(alerts: CustomerAlert[]): ExportResult
+     function exportHealthScores(scores: HealthScoreBreakdown[]): ExportResult
+     function exportMarketIntelligence(data: MarketIntelligence[]): ExportResult
+     ```
+
+**Dependencies on Previously Created Specs**:
+
+1. **CustomerSelector (Component Spec #1)** - REQUIRED:
+   - Provides customer selection UI and state management
+   - PredictiveIntelligence receives `customerId` from CustomerSelector
+   - Used to filter alerts to specific customer
+   - **Integration Point**: Props interface, callback pattern
+   - **Data Contract**: Customer ID (string)
+
+2. **Health Score Calculator (Component Spec #2)** - REQUIRED:
+   - Provides multi-factor health scoring algorithm
+   - Alert rules depend on health score thresholds and trends
+   - Payment, engagement, contract, support scores used directly
+   - **Integration Point**: `HealthScoreBreakdown` interface
+   - **Data Contract**: Individual factor scores + overall score + risk level
+
+3. **Market Intelligence Widget (Component Spec #3)** - REQUIRED:
+   - Provides market sentiment and news data
+   - Correlation Engine depends on market intelligence
+   - Market context enriches alert descriptions
+   - **Integration Point**: `MarketIntelligence` interface
+   - **Data Contract**: Sentiment, headlines, trends, last updated
+
+4. **Customer Health Monitoring (Combined Spec #4)** - REQUIRED:
+   - Combines health calculator with alert foundations
+   - Provides historical health data for trend analysis
+   - Pattern detection algorithms reused for alert evaluation
+   - **Integration Point**: `CustomerHealthData` + `HealthScoreHistory` interfaces
+   - **Data Contract**: Current health data + time-series history
+
+5. **Dashboard Orchestrator (Production Spec #5)** - RECOMMENDED:
+   - Provides error handling, export, performance, accessibility
+   - Wraps PredictiveIntelligence in error boundaries
+   - Enables data export for alerts and intelligence
+   - **Integration Point**: Error boundary wrapping, export utilities
+   - **Data Contract**: Error context, export configurations
+
+**Integration Dependencies Graph**:
+
+```
+[CustomerSelector] ──────────────────┐
+        │                            │
+        │ (customer ID)              │ (customer context)
+        ▼                            ▼
+[PredictiveIntelligence Dashboard] ◀──┐
+        │                              │
+        ├──▶ [Alert Engine] ──────────┤
+        │         │                    │
+        │         │ (health data)      │ (market context)
+        │         ▼                    │
+        ├──▶ [HealthCalculator] ◀─────┤
+        │    (Spec #2 - REQUIRED)     │
+        │                              │
+        ├──▶ [HealthMonitoring] ───────┤
+        │    (Spec #4 - REQUIRED)      │ (correlation input)
+        │         │                    │
+        │         │ (trends/history)   │
+        │         ▼                    ▼
+        ├──▶ [Correlation Engine] ◀───┤
+        │                              │
+        │                              │ (market data)
+        ├──▶ [MarketIntelligence] ────┘
+        │    (Spec #3 - REQUIRED)
+        │
+        ▼
+[Dashboard Orchestrator]
+(Spec #5 - Wraps entire system)
+```
+
+**Integration Testing Strategy**:
+
+1. **Unit Integration Tests** (Component Pairs):
+   - Test HealthCalculator → Alert Engine (score thresholds trigger alerts)
+   - Test MarketIntelligence → Correlation Engine (sentiment matches behavior)
+   - Test CustomerSelector → Dashboard (customer ID filtering works)
+
+2. **System Integration Tests** (Full Flow):
+   - Test customer selection → health fetch → alert generation → display
+   - Test health score change → alert trigger → correlation → notification
+   - Test market data update → correlation recalculation → UI update
+
+3. **Data Contract Tests**:
+   - Verify all interfaces match between components
+   - Test serialization/deserialization of shared types
+   - Validate data transformations preserve required fields
+
+4. **Error Propagation Tests**:
+   - Test health calculator error → alert engine graceful degradation
+   - Test market service failure → correlation engine fallback
+   - Test error boundaries isolate component failures
+
+**Cross-Spec Data Flow Summary**:
+
+```
+Mock Data (mock-customers.ts)
+    ↓
+CustomerSelector (Spec #1)
+    ↓ (customer ID)
+PredictiveIntelligence Dashboard
+    ↓
+    ├─→ HealthCalculator (Spec #2) → Health Scores
+    ├─→ HealthMonitoring (Spec #4) → Health History + Trends
+    ├─→ MarketIntelligence (Spec #3) → Sentiment + News
+    ↓
+Alert Engine (evaluates 5 rules with health data)
+    ↓
+Correlation Engine (matches alerts with market events)
+    ↓
+Prioritized Alerts + Market Context
+    ↓
+Dashboard UI (wrapped by Orchestrator Spec #5)
+    ↓
+User Actions (dismiss, snooze, complete actions)
+    ↓
+Audit Trail + Export (Orchestrator Spec #5)
+```
+
+This integration architecture demonstrates how the Predictive Intelligence System serves as the orchestration layer that brings together health monitoring, market intelligence, and customer selection into a unified early warning platform. Each previously created spec provides essential data or functionality that enables the sophisticated correlation and alerting capabilities of this system.
+
 ### Requirements
 
 **Functional Requirements - Alert Rules Engine**:
