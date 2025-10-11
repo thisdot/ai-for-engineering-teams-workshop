@@ -21,7 +21,7 @@ if [ -f "$CONFIG_FILE" ]; then
     API_KEY_SUFFIX="${ANTHROPIC_API_KEY: -20}"
     
     if [ -n "$API_KEY_SUFFIX" ]; then
-      echo "Adding API key suffix to approved list: $API_KEY_SUFFIX"
+      echo "Adding API key suffix to approved list"
       
       # Initialize customApiKeyResponses structure if it doesn't exist, then add suffix to approved array
       jq --arg suffix "$API_KEY_SUFFIX" '
