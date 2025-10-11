@@ -4,7 +4,7 @@
 claude --version > /dev/null 2>&1
 
 # Path to the internal config file
-CONFIG_FILE="$HOME/.claude/claude.json"
+CONFIG_FILE="$HOME/.claude.json"
 
 # Use jq to set the flags to true if the file exists
 if [ -f "$CONFIG_FILE" ]; then
