@@ -5,6 +5,7 @@ This is the workshop repository for **AI for Engineering Teams: Practical Tools 
 ## Getting Started
 
 ### Using VS Code Dev Containers (Recommended)
+Prerequisite: [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)
 
 1. Open this repository in VS Code
 2. When prompted, click "Reopen in Container" (or use Command Palette: "Dev Containers: Reopen in Container")
