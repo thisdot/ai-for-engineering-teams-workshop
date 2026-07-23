@@ -1,6 +1,12 @@
 'use client';
 
 import { Suspense } from 'react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 // Dynamic component imports with error boundaries
 const CustomerCardDemo = () => {
@@ -8,11 +14,13 @@ const CustomerCardDemo = () => {
     // Try to import CustomerCard - this will work after Exercise 3
     const CustomerCard = require('../components/CustomerCard')?.default;
     const mockCustomers = require('../data/mock-customers')?.mockCustomers;
-    
+
     if (CustomerCard && mockCustomers?.[0]) {
       return (
         <div className="space-y-4">
-          <p className="text-green-600 text-sm font-medium">✅ CustomerCard implemented!</p>
+          <p className="text-sm font-medium text-green-600 dark:text-green-500">
+            ✅ CustomerCard implemented!
+          </p>
           <div className="flex flex-wrap gap-4">
             <CustomerCard customer={mockCustomers[0]} />
             <CustomerCard customer={mockCustomers[1]} />
@@ -23,9 +31,9 @@ const CustomerCardDemo = () => {
   } catch (error) {
     // Component doesn't exist yet
   }
-  
+
   return (
-    <div className="text-gray-500 text-sm">
+    <div className="text-sm text-muted-foreground">
       After Exercise 3, your CustomerCard components will appear here showing customer information with health scores.
     </div>
   );
@@ -33,7 +41,7 @@ const CustomerCardDemo = () => {
 
 const DashboardWidgetDemo = ({ widgetName, exerciseNumber }: { widgetName: string, exerciseNumber: number }) => {
   return (
-    <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center text-gray-500 text-sm">
+    <div className="rounded-lg border-2 border-dashed border-border p-4 text-center text-sm text-muted-foreground">
       {widgetName}
       <br />
       <span className="text-xs">Exercise {exerciseNumber}</span>
@@ -43,61 +51,75 @@ const DashboardWidgetDemo = ({ widgetName, exerciseNumber }: { widgetName: strin
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-background p-4">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <h1 className="mb-2 font-heading text-4xl font-bold text-foreground">
           Customer Intelligence Dashboard
         </h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           AI for Engineering Teams Workshop - Your Progress
         </p>
       </header>
 
       {/* Progress Indicator */}
-      <div className="mb-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Workshop Progress</h2>
-        <div className="space-y-2 text-sm text-gray-600">
-          <p>✅ Setup Complete - Next.js app is running</p>
-          <p className="text-gray-400">⏳ Exercise 3: CustomerCard component (implement to see here)</p>
-          <p className="text-gray-400">⏳ Exercise 4: CustomerSelector integration</p>
-          <p className="text-gray-400">⏳ Exercise 5: Domain Health widget</p>
-          <p className="text-gray-400">⏳ Exercise 9: Production-ready features</p>
-        </div>
-      </div>
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle className="text-xl">Workshop Progress</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2 text-sm text-muted-foreground">
+          <p className="text-foreground">✅ Setup Complete - Next.js app is running</p>
+          <p>⏳ Exercise 3: CustomerCard component (implement to see here)</p>
+          <p>⏳ Exercise 4: CustomerSelector integration</p>
+          <p>⏳ Exercise 5: Domain Health widget</p>
+          <p>⏳ Exercise 9: Production-ready features</p>
+        </CardContent>
+      </Card>
 
       {/* Component Showcase Area */}
       <div className="space-y-8">
         {/* CustomerCard Section */}
-        <section className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">CustomerCard Component</h3>
-          <Suspense fallback={<div className="text-gray-500">Loading...</div>}>
-            <CustomerCardDemo />
-          </Suspense>
-        </section>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">CustomerCard Component</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
+              <CustomerCardDemo />
+            </Suspense>
+          </CardContent>
+        </Card>
 
         {/* Dashboard Widgets Section */}
-        <section className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">Dashboard Widgets</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <DashboardWidgetDemo widgetName="Domain Health Widget" exerciseNumber={5} />
-            <DashboardWidgetDemo widgetName="Market Intelligence" exerciseNumber={6} />
-            <DashboardWidgetDemo widgetName="Predictive Alerts" exerciseNumber={8} />
-          </div>
-        </section>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Dashboard Widgets</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <DashboardWidgetDemo widgetName="Domain Health Widget" exerciseNumber={5} />
+              <DashboardWidgetDemo widgetName="Market Intelligence" exerciseNumber={6} />
+              <DashboardWidgetDemo widgetName="Predictive Alerts" exerciseNumber={8} />
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Getting Started */}
-        <section className="bg-blue-50 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2">Ready to Start Building?</h3>
-          <p className="text-blue-800 mb-4">
-            Follow along with the workshop exercises to see this dashboard come to life with AI-generated components.
-          </p>
-          <div className="text-sm text-blue-700">
-            <p className="mb-1"><strong>Next:</strong> Exercise 1 - Create your first specification</p>
-            <p className="mb-1"><strong>Then:</strong> Exercise 3 - Generate your first component</p>
-            <p className="text-xs text-blue-600">💡 Tip: Refresh this page after completing exercises to see your progress!</p>
-          </div>
-        </section>
+        <Card className="bg-accent text-accent-foreground">
+          <CardHeader>
+            <CardTitle className="text-lg">Ready to Start Building?</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">
+              Follow along with the workshop exercises to see this dashboard come to life with AI-generated components.
+            </p>
+            <div className="text-sm text-muted-foreground">
+              <p className="mb-1"><strong className="text-foreground">Next:</strong> Exercise 1 - Create your first specification</p>
+              <p className="mb-1"><strong className="text-foreground">Then:</strong> Exercise 3 - Generate your first component</p>
+              <p className="text-xs">💡 Tip: Refresh this page after completing exercises to see your progress!</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
