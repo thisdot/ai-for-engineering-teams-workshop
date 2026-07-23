@@ -24,3 +24,24 @@ Use kebab-case for specification files:
 - `domain-health-widget-spec.md`
 
 Each specification should include Context, Requirements, Constraints, and Acceptance Criteria sections — review the model's output to confirm they're present and complete.
+
+## Spec Index
+
+Each spec is generated from the matching file in `@requirements/` and includes a **UI Components (shadcn/ui)** section.
+
+### Components & widgets
+- [customer-card-spec.md](customer-card-spec.md) — individual customer display card (`Card`, `Badge`, `Avatar`, `Tooltip`)
+- [customer-card-enhancement-spec.md](customer-card-enhancement-spec.md) — clickable selection state for CustomerCard (`Card`, `Toggle`)
+- [customer-selector-spec.md](customer-selector-spec.md) — search/select interface for 100+ customers (`Input`, `Command`, `ScrollArea`, `Skeleton`)
+- [customer-management-integration-spec.md](customer-management-integration-spec.md) — full CRUD feature (`Form`, `Select`, `Dialog`, `Table`, `Sonner`, `Tabs`)
+- [health-score-calculator-spec.md](health-score-calculator-spec.md) — scoring algorithm + health display widget (`Progress`, `Badge`, `Accordion`, `Chart`)
+- [market-intelligence-spec.md](market-intelligence-spec.md) — sentiment/news widget (`Card`, `Input`, `Badge`, `Skeleton`, `Alert`)
+- [predictive-alerts-spec.md](predictive-alerts-spec.md) — proactive risk alerts (`Alert`, `Badge`, `Sonner`, `Dialog`, `Tabs`, `Table`)
+
+### Cross-cutting concerns
+- [production-ready-dashboard-spec.md](production-ready-dashboard-spec.md) — error boundaries, export, performance, hardening (`Alert`, `Dialog`, `Table`, `Sonner`)
+- [accessibility-spec.md](accessibility-spec.md) — WCAG 2.1 AA; Radix-based primitives as the a11y foundation
+- [code-quality-spec.md](code-quality-spec.md) — consistent primitive reuse, theme tokens, shared helpers
+
+### Reference
+- [customer-card-example.md](customer-card-example.md) — worked example spec used as the format template
