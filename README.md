@@ -64,15 +64,15 @@ Complete exercises progressively through 7 focused sessions:
 3. **Advanced Spec Integration** - Build complex multi-component features
 4. **Implementing from Specs** - Transform specs into working React components
 5. **Building Custom Slash Commands** - Create workflow automation commands
-6. **Introduction to Subagents** - Define specialized AI agents
-7. **Advanced Subagent Orchestration** - Batch implementation patterns
+6. **Agent Skills** - Package reusable team expertise as portable skills
+7. **Orchestrating Skills and Agents** - Batch implementation patterns
 
 ## Key Learning Objectives
 
 - Turn ideas into clear specs
 - Implement spec-driven development workflows
 - Build custom slash commands for workflow automation
-- Create and orchestrate specialized AI subagents
+- Create agent skills and orchestrate subagents
 - Apply iterative refinement and verification patterns
 - Build production-ready applications with AI assistance
 

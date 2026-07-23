@@ -4,12 +4,12 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 07: Implement All Dashboard Specs
 
-You've created multiple specifications throughout the workshop. Now use subagent orchestration to implement all of them as working components for your Customer Intelligence Dashboard.
+You've created multiple specifications, custom commands, and a dashboard-components skill throughout the workshop. Now orchestrate all three layers to implement every spec as a working component for your Customer Intelligence Dashboard.
 
 ## Success Criteria
 
 - [ ] Identify all specs in @specs/ directory
-- [ ] Implement each spec as a component
+- [ ] Implement each spec with a subagent using your skill's conventions
 - [ ] Verify each component against acceptance criteria
 - [ ] Complete Customer Intelligence Dashboard ready for integration
 
@@ -39,14 +39,12 @@ background: /bg-blue-bottom-right.jpeg
 
 **Create orchestration workflow:**
 ```
-Use the dashboard-component-generator subagent to implement all component specs from @specs/.
-
-For each spec file:
-1. Read the spec file
-2. Use /implement command to generate the component
-3. Use /verify command to test with mock data
-4. Check if components/[ComponentName].tsx exists
-5. Verify against acceptance criteria
+For each spec file in @specs/, use a subagent to implement it:
+1. Inside each run, use the /implement command to generate the
+   component (the dashboard-components skill supplies our conventions)
+2. Use the /verify command to test with mock data
+3. Check if components/[ComponentName].tsx exists
+4. Verify against acceptance criteria
 
 After processing all specs, create a completion report:
 - ✅ Specs fully implemented (component exists and passes criteria)
@@ -54,10 +52,10 @@ After processing all specs, create a completion report:
 - ❌ Specs not yet implemented (no component file)
 ```
 
-**The subagent should:**
-- Process specs systematically
+**The orchestration should:**
+- Delegate each spec to an isolated subagent run
+- Apply the dashboard-components skill's conventions in every run
 - Generate components at components/[ComponentName].tsx
-- Verify against acceptance criteria from each spec
 - Track completion status for each component
 
 ---
@@ -75,6 +73,7 @@ Show me the completion report for all specs
 - How many specs were fully implemented? ✅
 - Are there any specs with issues? ⚠️
 - Are there any unimplemented specs? ❌
+- Do the components follow the skill's conventions consistently?
 - What needs to be fixed or completed?
 
 ---
@@ -85,12 +84,12 @@ background: /bg-blue-bottom-right.jpeg
 
 - All dashboard specs implemented as components
 - Each component verified against its spec's acceptance criteria
+- Consistent conventions across every component, supplied by your skill
 - Complete set of components ready for dashboard assembly
-- Experience with batch implementation workflows
 
 ## Key Patterns Learned
 
+- **Layered Orchestration** - Commands as steps, skill as conventions, subagents as isolated workers
 - **Batch Processing** - Implementing multiple specs efficiently
-- **Command Composition** - Using /implement and /verify in orchestrated workflow
 - **Systematic Verification** - Checking each component against its spec
 - **Complete Dashboard** - From specs to working implementation
