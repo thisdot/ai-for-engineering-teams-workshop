@@ -69,7 +69,7 @@ Complete exercises progressively through 7 focused sessions:
 
 ## Key Learning Objectives
 
-- Transform ideas into AI-ready specifications
+- Turn ideas into clear specs
 - Implement spec-driven development workflows
 - Build custom slash commands for workflow automation
 - Create and orchestrate specialized AI subagents

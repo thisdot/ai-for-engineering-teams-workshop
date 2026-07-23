@@ -4,9 +4,7 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 01: Write Your First Spec
 
-
-
-Transform CustomerCard requirements into an AI-ready specification. 
+Create a spec from the CustomerCard requirements. 
 
 ## Success Criteria
 
