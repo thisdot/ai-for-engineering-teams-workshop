@@ -65,3 +65,17 @@
 - Tailwind CSS for styling with design system colors
 - Error boundaries for robustness and graceful failure handling
 - In-memory storage simulation (no external database required)
+
+## UI Components (shadcn/ui)
+- `Form` (`src/components/ui/form.tsx`) with react-hook-form + zod — `AddCustomerForm` state, validation, and per-field error messages (real-time feedback)
+- `Input` + `Label` — name, email, company fields
+- `Select` (`src/components/ui/select.tsx`) — subscription tier (basic / premium / enterprise)
+- `Slider` (`src/components/ui/slider.tsx`) or numeric `Input` — health score bounded 0–100
+- `Dialog` (`src/components/ui/dialog.tsx`) — modal for "Add Customer" without leaving the list
+- `Table` (`src/components/ui/table.tsx`) — `CustomerList` with sortable/filterable columns
+- `DropdownMenu` (`src/components/ui/dropdown-menu.tsx`) — per-row actions (view / edit)
+- `Alert` (`src/components/ui/alert.tsx`) — API/validation error surfaces
+- `Sonner` (`src/components/ui/sonner.tsx`) — success/error toast notifications after CRUD calls
+- `Tabs` (`src/components/ui/tabs.tsx`) or `NavigationMenu` — "Browse" ↔ "Manage Customers" navigation
+- `Button` (`src/components/ui/button.tsx`) — submit / cancel / row actions
+- lucide icons (Plus, Pencil, etc.) for actions

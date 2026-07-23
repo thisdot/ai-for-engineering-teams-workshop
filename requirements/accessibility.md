@@ -13,3 +13,15 @@
 - Focus indicators visible and clear for all interactive elements
 - Alternative text for images and icons
 - Screen reader friendly content structure
+
+## UI Components (shadcn/ui)
+- Prefer shadcn/ui primitives (`src/components/ui/`) as the accessibility foundation — they are built on Radix UI, which ships keyboard interaction, focus management, and ARIA roles by default:
+  - `Dialog` — focus trap, `Esc` to close, `aria-modal`, restored focus on close
+  - `DropdownMenu` / `Select` / `Command` — roving-tabindex keyboard navigation and correct `role`/`aria-*`
+  - `Tabs` — arrow-key navigation with `aria-selected` / `aria-controls`
+  - `Tooltip` — accessible descriptions with proper `aria-describedby`
+  - `Label` + `Form` — programmatic label association and `aria-invalid` / error message wiring
+- Use theme tokens so color contrast meets AA in both light and dark mode; verify `foreground`/`muted-foreground` on their backgrounds
+- Respect reduced-motion (the project includes `tw-animate-css`; gate animations behind `motion-safe`)
+- Provide `aria-label`/`sr-only` text for lucide icons used as the sole affordance
+- Do not fork shadcn primitives in ways that strip their built-in ARIA/keyboard behavior

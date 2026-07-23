@@ -72,3 +72,14 @@
 - Teach effective spec generation using existing codebase analysis
 - Illustrate cohesive dashboard composition with multiple AI-generated widgets
 - Use mock data to ensure reliable, predictable workshop outcomes
+
+## UI Components (shadcn/ui)
+- `Card` (`src/components/ui/card.tsx`) — widget container matching other widgets
+- `Input` (`src/components/ui/input.tsx`) — company name entry with validation
+- `Button` (`src/components/ui/button.tsx`) — trigger / refresh lookup
+- `Badge` (`src/components/ui/badge.tsx`) — sentiment indicator using the shared green/yellow/red mapping
+- `Skeleton` (`src/components/ui/skeleton.tsx`) — loading state during simulated API delay
+- `Alert` (`src/components/ui/alert.tsx`) — error states from `MarketIntelligenceError`
+- `Separator` (`src/components/ui/separator.tsx`) — divide headlines
+- `Avatar` (`src/components/ui/avatar.tsx`) or small lucide icon — per-headline news source
+- Optional `Chart` (`src/components/ui/chart.tsx`) — sentiment trend using theme `chart-*` tokens

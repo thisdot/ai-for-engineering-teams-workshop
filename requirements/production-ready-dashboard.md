@@ -15,6 +15,18 @@
 - Automatic error reporting and logging for monitoring and debugging
 - Fallback UI components that maintain core dashboard functionality
 
+## UI Components (shadcn/ui)
+- `Alert` (`src/components/ui/alert.tsx`) — error-boundary fallback messaging with recovery guidance
+- `Button` (`src/components/ui/button.tsx`) — retry / recover actions in fallback UIs
+- `Skeleton` (`src/components/ui/skeleton.tsx`) — lazy-load / Suspense fallbacks
+- `Sonner` (`src/components/ui/sonner.tsx`) — non-blocking error + export-status notifications
+- `Dialog` (`src/components/ui/dialog.tsx`) — export configuration (formats, filters, date ranges) with progress + cancel
+- `Select` / `Tabs` — export format (CSV / JSON) and segment/date-range selection
+- `Table` (`src/components/ui/table.tsx`) — virtualized large customer lists and export previews
+- `NavigationMenu` / `Sidebar` + `Breadcrumb` — production app shell and landmark navigation
+- Theme-token-based light/dark support (already defined in `globals.css`) plus a mode toggle
+- All primitives are Radix-based, providing the keyboard/ARIA foundation the accessibility requirements depend on
+
 ### Data Export and Portability
 - Customer data export in CSV and JSON formats with configurable filters
 - Health score reports with historical data and breakdown details

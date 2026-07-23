@@ -43,6 +43,18 @@
 - Alert dismissal and action tracking interface
 - Historical alerts view and analytics
 
+## UI Components (shadcn/ui)
+- `Card` (`src/components/ui/card.tsx`) — alerts widget container matching other widgets
+- `Alert` (`src/components/ui/alert.tsx`) — individual alert rows with title + recommended-action description
+- `Badge` (`src/components/ui/badge.tsx`) — priority indicator (High / Medium) using the shared red/yellow/green mapping
+- `Sonner` (`src/components/ui/sonner.tsx`) — real-time toast for newly triggered high-priority alerts
+- `ScrollArea` (`src/components/ui/scroll-area.tsx`) — scrollable alert feed / historical list
+- `Dialog` (`src/components/ui/dialog.tsx`) — alert detail panel with context and actions
+- `Button` (`src/components/ui/button.tsx`) — dismiss / acknowledge / take-action controls
+- `Tabs` (`src/components/ui/tabs.tsx`) — switch between active alerts and historical view
+- `Table` (`src/components/ui/table.tsx`) — historical alerts + analytics
+- `Skeleton` — loading state; lucide icons (AlertTriangle, Bell) for priority affordances
+
 ## AI Collaboration Requirements
 - Collaborative rule design sessions exploring edge cases and thresholds
 - AI-assisted exploration of alert logic and business implications

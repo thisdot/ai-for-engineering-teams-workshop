@@ -21,3 +21,8 @@
 - Uses mock data from `src/data/mock-customers.ts`
 - Customer interface includes optional `domains` array of website URLs
 - Supports customers with 1 or multiple domains for health checking
+
+## UI Primitives
+- Build on the shared `Card` primitive from `src/components/ui/card.tsx`
+- Compose the card using its subcomponents: `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, and `CardFooter`
+- Do not hand-roll the card container styling; rely on the primitive for consistent spacing, radius, and theming

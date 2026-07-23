@@ -81,3 +81,13 @@
 - Real-time score updates when customer selection changes
 - Dashboard layout integration maintaining responsive design
 - Color coding consistency with other dashboard health indicators
+
+## UI Components (shadcn/ui)
+- `Card` (`src/components/ui/card.tsx`) — CustomerHealthDisplay container matching other widgets
+- `Progress` (`src/components/ui/progress.tsx`) — 0–100 overall score with color-coded fill
+- `Badge` (`src/components/ui/badge.tsx`) — risk-level label (Healthy / Warning / Critical), shared color mapping
+- `Accordion` (`src/components/ui/accordion.tsx`) or `Collapsible` — expandable per-factor breakdown (payment/engagement/contract/support)
+- `Chart` (`src/components/ui/chart.tsx`, Recharts) — factor-weight breakdown using theme `chart-1..5` tokens
+- `Tooltip` (`src/components/ui/tooltip.tsx`) — explain each factor's weight (40/30/20/10)
+- `Skeleton` — loading state; `Alert` — error state
+- Reuse the shared `healthColor(score)` mapping so colors match CustomerCard and market intelligence
