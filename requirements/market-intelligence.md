@@ -38,7 +38,7 @@
 - Maintain responsive grid layout and consistent spacing
 
 ## Spec-Driven Workflow Requirements
-- Generate comprehensive spec using @templates/spec-template.md
+- Generate comprehensive spec from these requirements
 - Analyze existing components for pattern consistency before spec creation
 - Store generated spec in @specs/ directory for reference
 - Reference existing component patterns in spec constraints section

@@ -4,11 +4,6 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 07: Implement All Dashboard Specs
 
-**Time:** 30 minutes
-**Goal:** Use orchestration to implement all your dashboard specifications systematically
-
-## The Challenge
-
 You've created multiple specifications throughout the workshop. Now use subagent orchestration to implement all of them as working components for your Customer Intelligence Dashboard.
 
 ## Success Criteria
@@ -24,7 +19,7 @@ background: /bg-blue-bottom-right.jpeg
 
 ## Your Tasks
 
-### Part 1: Inventory Your Specs (5 minutes)
+### Part 1: Inventory Your Specs
 
 **List all specification files:**
 ```
@@ -40,7 +35,7 @@ What spec files do we have in @specs/?
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 2: Orchestrated Implementation (22 minutes)
+### Part 2: Orchestrated Implementation
 
 **Create orchestration workflow:**
 ```
@@ -69,7 +64,7 @@ After processing all specs, create a completion report:
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 3: Review Completion Report (3 minutes)
+### Part 3: Review Completion Report
 
 **Analyze the completion report:**
 ```

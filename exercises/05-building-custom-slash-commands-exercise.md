@@ -4,10 +4,6 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 05: Building Custom Slash Commands
 
-**Time:** 20 minutes
-**Goal:** Create focused single-responsibility commands for your development workflow
-
-## The Challenge
 
 Build custom slash commands that automate repetitive workflow steps: spec generation, component implementation, and testing. This teaches command automation and the single responsibility principle.
 
@@ -24,15 +20,14 @@ background: /bg-blue-bottom-right.jpeg
 
 ## Your Task
 
-### Part 1: Spec Generation Command (7 minutes)
+### Part 1: Spec Generation Command
 
 **Create `/spec` command:**
 ```markdown
 Create a /spec command that:
 - Takes a component name as parameter (e.g., "CustomerCard")
 - Checks for @requirements/[component-name].md file
-- Uses @templates/spec-template.md structure
-- Generates spec with Context, Requirements, Constraints, Acceptance Criteria
+- Generates a well-structured spec with Context, Requirements, Constraints, Acceptance Criteria
 - Saves to @specs/[component-name]-spec.md
 ```
 
@@ -45,7 +40,7 @@ Create a /spec command that:
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 2: Implementation Command (7 minutes)
+### Part 2: Implementation Command
 
 **Create `/implement` command:**
 ```markdown
@@ -66,7 +61,7 @@ Create a /implement command that:
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 3: Verification Command (6 minutes)
+### Part 3: Verification Command
 
 **Create `/verify` command:**
 ```markdown

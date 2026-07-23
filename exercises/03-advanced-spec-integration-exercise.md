@@ -1,9 +1,5 @@
 # Exercise 03: Advanced Spec Integration
 
-**Time:** 15 minutes
-**Goal:** Create advanced integration specifications for complex dashboard features
-
-## The Challenge
 
 Use your specification writing skills to tackle complex dashboard integration features that require multiple components working together, demonstrating advanced spec-driven development.
 
@@ -20,30 +16,30 @@ background: /bg-blue-bottom-right.jpeg
 
 ## Your Tasks
 
-### Part 1: Generate Advanced Integration Specs (10 minutes)
+### Part 1: Generate Advanced Integration Specs
 
 **Create all three complex dashboard integration specs:**
 
 **Customer Health Monitoring Integration:**
 ```
-Write a CustomerHealthMonitoring spec using @templates/spec-template.md and @requirements/health-score-calculator.md and @requirements/predictive-alerts.md
+Write a CustomerHealthMonitoring spec based on @requirements/health-score-calculator.md and @requirements/predictive-alerts.md
 ```
 
 **Dashboard Orchestration System:**
 ```
-Write a DashboardOrchestrator spec using @templates/spec-template.md and @requirements/production-ready-dashboard.md
+Write a DashboardOrchestrator spec based on @requirements/production-ready-dashboard.md
 ```
 
 **Predictive Customer Intelligence:**
 ```
-Write a PredictiveIntelligence spec using @templates/spec-template.md and @requirements/predictive-alerts.md and @requirements/market-intelligence.md
+Write a PredictiveIntelligence spec based on @requirements/predictive-alerts.md and @requirements/market-intelligence.md
 ```
 
 ---
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 2: Integration Validation (3 minutes)
+### Part 2: Integration Validation
 
 **Review your integration spec:**
 - Does it clearly define component dependencies?
@@ -59,12 +55,6 @@ Add a section to your spec titled "Integration Architecture" that includes:
 - Data flow description
 - Key integration points
 - Dependencies on previously created specs
-```
-
-## Save Your Work
-
-```
-git add @specs/*.md && git commit -m "docs: add advanced Customer Intelligence Dashboard integration specifications"
 ```
 
 ---

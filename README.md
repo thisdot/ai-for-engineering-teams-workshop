@@ -36,15 +36,14 @@ npm run dev
 ├── public/              # Static assets
 ├── exercises/           # Workshop exercises
 ├── requirements/        # Feature requirements and specifications
-├── specs/               # Generated specifications (AI output)
-└── templates/           # Specification templates
+└── specs/               # Generated specifications (AI output)
 ```
 
 ## Workshop Methodology
 
 This workshop teaches **spec-driven development** with AI agents:
 
-1. **Write clear specifications** using templates in `/templates/`
+1. **Generate clear specifications** from the requirements in `/requirements/`
 2. **Store generated specs** in `/specs/` for reference
 3. **Work through exercises** in `/exercises/` directory
 4. **Build iteratively** with AI assistance
@@ -58,20 +57,18 @@ This workshop teaches **spec-driven development** with AI agents:
 
 ## Workshop Exercises
 
-Complete exercises progressively through 8 focused sessions:
+Complete exercises progressively through 7 focused sessions:
 
-1. **Effective Prompting Techniques** - Practice refining prompts for better AI output
-2. **Thinking in Specs** - Create your first CustomerCard specification
-3. **Expanding Dashboard Specs** - Generate additional component specifications
-4. **Advanced Spec Integration** - Build complex multi-component features
-5. **Implementing from Specs** - Transform specs into working React components
-6. **Building Custom Slash Commands** - Create workflow automation commands
-7. **Introduction to Subagents** - Define specialized AI agents
-8. **Advanced Subagent Orchestration** - Batch implementation patterns
+1. **Thinking in Specs** - Create your first CustomerCard specification
+2. **Expanding Dashboard Specs** - Generate additional component specifications
+3. **Advanced Spec Integration** - Build complex multi-component features
+4. **Implementing from Specs** - Transform specs into working React components
+5. **Building Custom Slash Commands** - Create workflow automation commands
+6. **Introduction to Subagents** - Define specialized AI agents
+7. **Advanced Subagent Orchestration** - Batch implementation patterns
 
 ## Key Learning Objectives
 
-- Master effective prompting techniques for AI collaboration
 - Transform ideas into AI-ready specifications
 - Implement spec-driven development workflows
 - Build custom slash commands for workflow automation

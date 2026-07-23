@@ -4,10 +4,6 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 04: Implementing from Specs
 
-**Time:** 20 minutes
-**Goal:** Transform your CustomerCard specification into working React component code
-
-## The Challenge
 
 Bridge the gap between specification and implementation by using your CustomerCard spec to generate production-ready component code for the Customer Intelligence Dashboard.
 
@@ -24,7 +20,7 @@ background: /bg-blue-bottom-right.jpeg
 
 ## Your Task
 
-### Part 1: Generate Component (10 minutes)
+### Part 1: Generate Component
 
 **Ask Claude Code to implement from your specification:**
 ```
@@ -44,7 +40,7 @@ Use @requirements/customer-card.md for context and create the component at compo
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 2: Iterative Refinement (5 minutes)
+### Part 2: Iterative Refinement
 
 **If the component doesn't fully match your spec:**
 ```
@@ -61,7 +57,7 @@ The component is missing [specific requirement from spec]. Please update it to m
 background: /bg-blue-bottom-right.jpeg
 ---
 
-### Part 3: Testing and Validation (5 minutes)
+### Part 3: Testing and Validation
 
 **Step 1: Create Test Usage**
 
@@ -76,12 +72,6 @@ Cross-reference the implementation with your spec:
 - [ ] All requirements implemented?
 - [ ] Constraints followed (Next.js 15, React 19, TypeScript, Tailwind)?
 - [ ] Acceptance criteria met?
-
-**Step 3: Save Your Work**
-
-```
-git add components/CustomerCard.tsx && git commit -m "feat: implement CustomerCard component from spec"
-```
 
 ---
 background: /bg-blue-bottom-right.jpeg

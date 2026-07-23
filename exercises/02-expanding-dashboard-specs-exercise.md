@@ -4,10 +4,6 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 02: Expanding Dashboard Specs
 
-**Time:** 15 minutes
-**Goal:** Generate additional specifications for Customer Intelligence Dashboard components
-
-## The Challenge
 
 Build on your CustomerCard specification experience to create specs for additional dashboard components, practicing requirements analysis and component integration planning.
 
@@ -16,7 +12,7 @@ Build on your CustomerCard specification experience to create specs for addition
 - [ ] Generate 1-2 additional component specifications
 - [ ] Ensure consistent interface patterns across specs
 - [ ] Document component integration points
-- [ ] All specs follow template structure completely
+- [ ] All specs include Context, Requirements, Constraints, and Acceptance Criteria
 
 ---
 
@@ -30,8 +26,8 @@ Build on your CustomerCard specification experience to create specs for addition
 
 **CustomerSelector**
 ```
-@templates/spec-template.md
-+ @requirements/customer-selector.md
+Write a spec from
+@requirements/customer-selector.md
 ```
 Focus: Container, search, selection
 
@@ -41,8 +37,8 @@ Focus: Container, search, selection
 
 **HealthScoreCalculator**
 ```
-@templates/spec-template.md
-+ @requirements/health-score-calculator.md
+Write a spec from
+@requirements/health-score-calculator.md
 ```
 Focus: Business logic, algorithms
 
@@ -52,8 +48,8 @@ Focus: Business logic, algorithms
 
 **MarketIntelligence**
 ```
-@templates/spec-template.md
-+ @requirements/market-intelligence.md
+Write a spec from
+@requirements/market-intelligence.md
 ```
 Focus: Data display, integration
 
@@ -61,10 +57,7 @@ Focus: Data display, integration
 
 </div>
 
-**Cross-check integration with CustomerCard spec, then save:**
-```
-git add @specs/*.md && git commit -m "docs: expand dashboard specifications"
-```
+**Cross-check integration with your CustomerCard spec.**
 
 ## Expected Outcomes
 

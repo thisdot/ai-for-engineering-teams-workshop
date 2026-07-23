@@ -4,10 +4,6 @@ background: /bg-blue-bottom-right.jpeg
 
 # Exercise 06: Using Subagents for Dashboard Development
 
-**Time:** 10 minutes
-**Goal:** Create subagents to accelerate Customer Intelligence Dashboard development
-
-## The Challenge
 
 Learn to create and use specialized subagents for Customer Intelligence Dashboard components, combining subagent techniques with actual application development.
 
@@ -23,7 +19,7 @@ background: /bg-blue-bottom-right.jpeg
 
 ## Your Tasks
 
-### Part 1: Create Component Generator Subagent (4 minutes)
+### Part 1: Create Component Generator Subagent
 
 **Step 1: Open the subagent creation interface**
 ```
@@ -51,7 +47,7 @@ background: /bg-blue-bottom-right.jpeg
 
 <div>
 
-### Part 2: Generate CustomerCard Component (4 minutes)
+### Part 2: Generate CustomerCard Component
 
 **Ask your subagent to create the component:**
 ```
@@ -66,7 +62,7 @@ and @specs/customer-card-example.md
 
 <div>
 
-### Part 3: Review and Integration (2 minutes)
+### Part 3: Review and Integration
 
 **Review the generated CustomerCard component:**
 - Does it match the Customer Intelligence Dashboard design?
