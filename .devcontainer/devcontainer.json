@@ -13,22 +13,11 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot",
-        "GitHub.copilot-chat",
-        "anthropic.claude-code",
-        "RooVeterinaryInc.roo-cline"
+        "anthropic.claude-code"
       ],
       "settings": {
-        "remote.extensionKind": {
-          "GitHub.copilot": ["workspace"],
-          "GitHub.copilot-chat": ["workspace"],
-          "anthropic.claude-code": ["workspace"],
-          "RooVeterinaryInc.roo-cline": ["workspace"]
-        },
-        "settings": {
-          "editor.formatOnSave": true,
-          "typescript.tsdk": "app/node_modules/typescript/lib"
-        },
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "app/node_modules/typescript/lib",
         "extensions.ignoreRecommendations": false,
         "update.mode": "manual"
       }
